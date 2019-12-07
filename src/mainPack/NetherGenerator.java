@@ -4,27 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Chest;
-import org.bukkit.block.CreatureSpawner;
-import org.bukkit.block.Dispenser;
-import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
-import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 //import net.minecraft.server.v1_12_R1.BlockPosition;
 //import net.minecraft.server.v1_12_R1.IBlockData;
@@ -123,7 +108,7 @@ public class NetherGenerator extends BlockPopulator {
 								break;
 							}
 							else {
-								l.getBlock().setType(Material.WEB);
+								l.getBlock().setType(Material.COBWEB);
 							}
 							l.subtract(0, 1, 0);
 						}
@@ -142,9 +127,8 @@ public class NetherGenerator extends BlockPopulator {
 			if(yvals!=null) {
 				for(int y : yvals) {
 					if(randor.nextInt(2)==1) {
-						int length = randor.nextInt(5)+7;
 						Location l = new Location(w, cXOff, y-1, cZOff);
-						l.getBlock().setType(Material.MYCEL);
+						l.getBlock().setType(Material.MYCELIUM);
 						if(randor.nextBoolean()==true) {
 							l.add(0, 1, 0);
 						Boolean b = w.generateTree(l, TreeType.BROWN_MUSHROOM);

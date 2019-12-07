@@ -1,110 +1,64 @@
 package mainPack;
 
-import java.awt.Event;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Achievement;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Bat;
-import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Husk;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SmallFireball;
-import org.bukkit.entity.Spider;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Witch;
 import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.WitherSkull;
-import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
-import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerAnimationEvent;
-import org.bukkit.event.player.PlayerBedEnterEvent;
-import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
-import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.MaterialData;
-import org.bukkit.material.Vine;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -383,7 +337,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 			boolean banana = false;
 			Location l2 = null;
 			for(int i2 = 10; i2 > 0; i2--) {
-				if(l3.getBlock().getType()==Material.LAVA||l3.getBlock().getType()==Material.STATIONARY_LAVA) {
+				if(l3.getBlock().getType()==Material.LAVA) {
 					banana = true;
 					l2 = l3.clone();
 				}
@@ -491,7 +445,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 									try {
 									e2.getWorld().playSound(e2.getLocation(), Sound.BLOCK_FIRE_AMBIENT, 1, 2);
 									if(getLookingAt((LivingEntity) e2, (LivingEntity) ((Monster) e).getTarget())) {
-										int radius = 1;
 										if(((Player) ((Monster) e).getTarget()).isSneaking()){
 											
 										}
@@ -513,7 +466,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 										e.getLocation().getBlock().setType(Material.FIRE);
 									}
 									if(randor.nextInt(28)==1) {
-										e.getLocation().subtract(0, 1, 0).getBlock().setType(Material.MAGMA);
+										e.getLocation().subtract(0, 1, 0).getBlock().setType(Material.MAGMA_BLOCK);
 									}
 									}
 									catch(Exception error) {
@@ -534,7 +487,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 						    					for (int y = (cy - radius); y < (cy + radius); y++) {
 						    						double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z) + ((cy - y) * (cy - y));
 						    							org.bukkit.block.Block b = new Location(loc.getWorld(), x, y, z).getBlock();
-						    							if(b.getType()==Material.TORCH||b.getType()==Material.FIRE||b.getType()==Material.GLOWSTONE||b.getType()==Material.JACK_O_LANTERN||b.getType()==Material.REDSTONE_LAMP_ON||b.getType()==Material.SEA_LANTERN) {
+						    							if(b.getType()==Material.TORCH||b.getType()==Material.FIRE||b.getType()==Material.GLOWSTONE||b.getType()==Material.JACK_O_LANTERN||b.getType()==Material.SEA_LANTERN) {
 						    								b.setType(Material.AIR);
 						    							}
 						    					}
@@ -651,7 +604,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 			return;
 		}
 		try {
-			World wor = event.getRightClicked().getWorld();
 		if(!(event.getRightClicked() instanceof Player)) {
 			ItemStack i = event.getPlayer().getInventory().getItemInMainHand();
 			if(i.getType()==Material.NAME_TAG) {
@@ -697,7 +649,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if(!worlds.contains(event.getEntity().getWorld().getName())) {
 			return;
 		}
-		World wor = event.getEntity().getWorld();
+
 		if(caveents==true) {
 		Entity e = event.getEntity();
 		try {
@@ -731,7 +683,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 	
 	public void doLightning(Player p) {
 		try {
-		if(p.getLocation().getBlock().getBiome()==Biome.HELL) {
+		if(p.getLocation().getBlock().getBiome()==Biome.NETHER) {
 			if(randor.nextInt(config.getInt("Lightning Chance ")+1)==0) {
 				Location l = p.getLocation();
 				l.getWorld().strikeLightning(l.add((getRandValue() * randor.nextInt(160)), 1, (getRandValue() * randor.nextInt(160))));
@@ -758,7 +710,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 	@EventHandler
 	public void onWalke(PlayerMoveEvent event) {
 		if (config.getBoolean("Enable Ambient Sounds ")==true) {
-			Player p = event.getPlayer();
 			if(worlds.contains(event.getPlayer().getWorld().getName())) {
 			if (!(((int) event.getFrom().getX() == (int) event.getTo().getX())
 					&& ((int) event.getFrom().getY() == (int) event.getTo().getY())
@@ -771,7 +722,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 	
 	public void doFootSteps(Player p) {
 		try {
-		int var = 2;
 		if ((!p.isSneaking())) {
 			org.bukkit.block.Block b = p.getLocation().subtract(0, 1, 0).getBlock();
 			Material type = b.getType();
@@ -810,12 +760,12 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if (config.getBoolean("Enable Ambient Sounds ")==false) {
 			return;
 		}
-		if (p.getLocation().getBlock().getBiome() == org.bukkit.block.Biome.HELL) {
+		if (p.getLocation().getBlock().getBiome() == org.bukkit.block.Biome.NETHER) {
 			Location l = p.getLocation();
 			for(int i = 0; i < 10; i++) {
 				Material mm = l.add(0, 1, 0).getBlock().getType();
 				if(mm!=Material.AIR){
-					if(mm==Material.NETHERRACK||mm==Material.MAGMA||mm==Material.SOUL_SAND) {
+					if(mm==Material.NETHERRACK||mm==Material.MAGMA_BLOCK||mm==Material.SOUL_SAND) {
 					}
 					else {
 						return;
@@ -827,10 +777,10 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 				try {
 				if (random == 1) {
 					p.playSound(p.getLocation().add(8 + (randor.nextInt(2) + 1), 6, 8 + (randor.nextInt(2) + 1)),
-							Sound.ENTITY_ENDERDRAGON_GROWL, (float) getRandLowVolume(), randor.nextInt(2));
+							Sound.ENTITY_ENDER_DRAGON_GROWL, (float) getRandLowVolume(), randor.nextInt(2));
 				} else {
 					p.playSound(p.getLocation().subtract(8 + (randor.nextInt(2) + 1), 6, 8 + (randor.nextInt(2) + 1)),
-							Sound.ENTITY_ENDERDRAGON_GROWL, (float) getRandLowVolume(), randor.nextInt(2));
+							Sound.ENTITY_ENDER_DRAGON_GROWL, (float) getRandLowVolume(), randor.nextInt(2));
 				}
 				}
 				catch(Exception e) {
@@ -892,17 +842,17 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 				//Sound.valueOf("ENTITY_IRON_GOLEM_HURT")
 				try {
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.01, 0), 3);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.01, 0), 3);
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.01, 0), 9);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.01, 0), 9);
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.01, 0), 24);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.01, 0), 24);
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.001, 0), 38);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.001, 0), 38);
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.01, 0), 50);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.01, 0), 50);
 				Bukkit.getScheduler().runTaskLater(this,
-						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_HURT, (float) 0.01, 0), 67);
+						() -> p.playSound(p.getLocation(), Sound.ENTITY_IRON_GOLEM_HURT, (float) 0.01, 0), 67);
 				}
 				catch(Exception e) {
 					Bukkit.getScheduler().runTaskLater(this,
@@ -970,12 +920,12 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if ((config.getBoolean("Enable Ambient Sounds ")==false)||p.getLocation().getY()<70) {
 			return;
 		}
-		if (p.getLocation().getBlock().getBiome() == org.bukkit.block.Biome.HELL) {
+		if (p.getLocation().getBlock().getBiome() == org.bukkit.block.Biome.NETHER) {
 			Location l = p.getLocation();
 			for(int i = 0; i < 10; i++) {
 				Material mm = l.add(0, 1, 0).getBlock().getType();
 				if(mm!=Material.AIR){
-					if(mm==Material.NETHERRACK||mm==Material.MAGMA||mm==Material.SOUL_SAND) {
+					if(mm==Material.NETHERRACK||mm==Material.MAGMA_BLOCK||mm==Material.SOUL_SAND) {
 					}
 					else {
 						return;
@@ -1048,11 +998,10 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 	if(!worlds.contains(p.getWorld().getName())) {
 		return;
 	}
-	World wor = p.getWorld();
 	if(randor.nextInt(2)==0) {
 		if(p.isSprinting()) {
 			if(p.getLocation().subtract(0, 1, 0).getBlock().getType()==Material.SOUL_SAND) {
-				if(p.getLocation().getBlock().getBiome()==Biome.HELL) {
+				if(p.getLocation().getBlock().getBiome()==Biome.NETHER) {
 					if (randor.nextBoolean() == true) {
 						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_GHAST_SCREAM, (float) 1, 0);
 					} else {
@@ -1065,7 +1014,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 	}
 	if(randor.nextInt(config.getInt("Netherack Melting Chance ")+1)==0) {
 		if(p.getLocation().subtract(0, 1, 0).getBlock().getType()==Material.NETHERRACK){
-			if(p.getLocation().getBlock().getBiome()==Biome.HELL) {
+			if(p.getLocation().getBlock().getBiome()==Biome.NETHER) {
 				Location newL = p.getLocation().subtract(0, 1, 0);
 				Material xp = newL.clone().add(1, 0, 0).getBlock().getType();
 				Material xn = newL.clone().subtract(1, 0, 0).getBlock().getType();
@@ -1076,11 +1025,11 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 				Material xn2 = newL2.clone().subtract(1, 0, 0).getBlock().getType();
 				Material zp2 = newL2.clone().add(0, 0, 1).getBlock().getType();
 				Material zn2 = newL2.clone().subtract(0, 0, 1).getBlock().getType();
-				if((xp == Material.LAVA || xp == Material.STATIONARY_LAVA)||(xn == Material.LAVA || xn == Material.STATIONARY_LAVA)||(zn == Material.LAVA || zn == Material.STATIONARY_LAVA)||(zp == Material.LAVA || zp == Material.STATIONARY_LAVA)) {
-					p.getLocation().subtract(0,1,0).getBlock().setType(Material.MAGMA);
+				if(xp == Material.LAVA ||xn == Material.LAVA ||zn == Material.LAVA || zp == Material.LAVA) {
+					p.getLocation().subtract(0,1,0).getBlock().setType(Material.MAGMA_BLOCK);
 				}
-				else if((xp2 == Material.LAVA || xp2 == Material.STATIONARY_LAVA)||(xn2 == Material.LAVA || xn2 == Material.STATIONARY_LAVA)||(zn2 == Material.LAVA || zn2 == Material.STATIONARY_LAVA)||(zp2 == Material.LAVA || zp2 == Material.STATIONARY_LAVA)) {
-					p.getLocation().subtract(0,1,0).getBlock().setType(Material.MAGMA);
+				else if(xp2 == Material.LAVA || xn2 == Material.LAVA  || zn2 == Material.LAVA  || zp2 == Material.LAVA) {
+					p.getLocation().subtract(0,1,0).getBlock().setType(Material.MAGMA_BLOCK);
 				}
 			}
 		}
@@ -1102,7 +1051,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if(!worlds.contains(p.getWorld().getName())) {
 			return;
 		}
-		World wor = p.getWorld();
 		if(config.getBoolean("Netherrack Fires ")==true) {
 			try {
 				if(randor.nextInt(config.getInt("Netherrack Fire Chance ")+1)==0) {
@@ -1207,7 +1155,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 					e = (LivingEntity) e2;
 					e.setSilent(true);
 					EntityEquipment ee = ((LivingEntity) e).getEquipment();
-					ItemStack myAwesomeSkull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+					ItemStack myAwesomeSkull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
 					SkullMeta myAwesomeSkullMeta = (SkullMeta) myAwesomeSkull.getItemMeta();
 					myAwesomeSkullMeta.setOwner("MrMatchbox");
 					myAwesomeSkull.setItemMeta(myAwesomeSkullMeta);
@@ -1235,10 +1183,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 					LeatherArmorMeta lch62 = (LeatherArmorMeta) lchest3.getItemMeta();
 					lch62.setColor(Color.fromRGB(38, 33, 36));
 					lchest3.setItemMeta(lch62);
-					ItemStack myAwesomeSkull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-					SkullMeta myAwesomeSkullMeta = (SkullMeta) myAwesomeSkull.getItemMeta();
-					myAwesomeSkullMeta.setOwner("MHF_WSkeleton");
-					myAwesomeSkull.setItemMeta(myAwesomeSkullMeta);
+					ItemStack myAwesomeSkull = new ItemStack(Material.WITHER_SKELETON_SKULL, 1, (short) 3);
 					ee.setHelmet(myAwesomeSkull);
 					ee.setChestplate(lchest);
 					ee.setLeggings(lchest3);
@@ -1329,7 +1274,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 					Entity scream = e.getWorld().spawnEntity(e.getLocation().add(0, 1, 0), EntityType.ZOMBIE_VILLAGER);
 					((ZombieVillager) scream).setBaby(true);
 					EntityEquipment ee = ((Monster) scream).getEquipment();
-					ItemStack myAwesomeSkull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+					ItemStack myAwesomeSkull = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
 					SkullMeta myAwesomeSkullMeta = (SkullMeta) myAwesomeSkull.getItemMeta();
 					myAwesomeSkullMeta.setOwner("crolin");
 					myAwesomeSkull.setItemMeta(myAwesomeSkullMeta);
@@ -1360,7 +1305,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if(!worlds.contains(event.getEntity().getWorld().getName())) {
 			return;
 		}
-		World wor = event.getEntity().getWorld();
 		if (event.getDamager() instanceof Monster && event.getEntity() instanceof Player) {
 			try {
 			boolean isMagma = false;
@@ -1431,7 +1375,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if(!worlds.contains(event.getEntity().getWorld().getName())) {
 			return;
 		}
-		World wor = event.getEntity().getWorld();
 		if(!event.isCancelled()) {
 			try {
 				boolean isNec = false;
@@ -1496,7 +1439,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 									if (dist < radius * radius) {
 											Location l2 = new Location(loc.getWorld(), x, y, z);
 											if(l2.getBlock().getType()==Material.NETHERRACK) {
-												l2.getBlock().setType(Material.STATIONARY_LAVA);
+												l2.getBlock().setType(Material.LEGACY_STATIONARY_LAVA);
 											}
 									}
 								}
@@ -1519,7 +1462,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 			try {
 			if(worlds.contains(p.getWorld().getName())) {
 				if(e.getBlockClicked()!=null) {
-					if(e.getBlockClicked().getType()==Material.STATIONARY_LAVA||e.getBlockClicked().getType()==Material.LAVA) {
+					if(e.getBlockClicked().getType()==Material.LAVA) {
 						Location loc = e.getBlockClicked().getLocation();
 						int radius = 2;
 						int cx = loc.getBlockX();
@@ -1532,7 +1475,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 
 									if (dist < radius * radius) {
 											Location l2 = new Location(loc.getWorld(), x, y, z);
-											if(l2.getBlock().getType()==Material.STATIONARY_LAVA||l2.getBlock().getType()==Material.LAVA) {
+											if(l2.getBlock().getType()==Material.LAVA) {
 												l2.getBlock().setType(Material.AIR);
 											}
 									}
@@ -1558,7 +1501,7 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 			if(p.getInventory().getItem(e.getNewSlot())!=null) {
 		Material m = p.getInventory().getItem(e.getNewSlot()).getType();
 			if(m == Material.LAVA_BUCKET) {
-				if(p.getLocation().getBlock().getBiome()==Biome.HELL) {
+				if(p.getLocation().getBlock().getBiome()==Biome.NETHER) {
 					if(!effectEnts.contains(p)) {
 					effectEnts.add(p);
 					}
@@ -1646,7 +1589,6 @@ public class main extends JavaPlugin implements Listener, CommandExecutor{
 		if(!worlds.contains(p.getWorld().getName())) {
 			return;
 		}
-		World wor = p.getWorld();
 		if(config.getBoolean("Enable Falling Nether ")==true) {
 			try {
 		if(randor.nextInt(config.getInt("Falling Nether Chance")+1)==0) {
